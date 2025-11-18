@@ -1,168 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CarePlus Hospital — Login</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>CureDash — Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b1020;
-      --bg-soft: #121933;
-      --card: #0f1630;
-      --card-2: #111a3a;
-      --text: #e8ecff;
-      --muted: #a7b0d6;
-      --brand: #6aa6ff;
-      --brand-2: #87f3ff;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --ring: 0 0 0 3px rgba(135,243,255,.25);
-      --radius: 18px;
-    }
-    @media (prefers-color-scheme: light){
-      :root {
-        --bg:#f6f7fb; --bg-soft:#eef1fb; --card:#ffffff; --card-2:#ffffff; --text:#0d1633;
-        --muted:#556188; --brand:#2f66ff; --brand-2:#00bcd4; --shadow:0 10px 30px rgba(12,24,64,.08);
-      }
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh;
-      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .login-card {
-      background: var(--card);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      width: 100%;
-      max-width: 420px;
-      padding: 32px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,.08);
-    }
-
-    .login-card .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      font-weight: 800;
-      font-size: 1.2rem;
-    }
-
-    .login-card .logo .mark {
-      width: 44px; height: 44px;
-      display: grid; place-items: center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      box-shadow: var(--shadow);
-      font-size: 22px;
-    }
-
-    .login-card p {
-      color: var(--muted);
-      margin-bottom: 24px;
-      font-size: .95rem;
-    }
-
-    form { display: grid; gap: 16px; text-align: left; }
-
-    label { font-weight: 600; font-size: 0.9rem; }
-
-    input, select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: var(--card-2);
-      color: var(--text);
-      font-size: 1rem;
-      outline: none;
-    }
-
-    input:focus, select:focus { box-shadow: var(--ring); }
-
-    .btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      color: #001028;
-      font-weight: 800;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .btn:hover { transform: translateY(-2px); }
-
-    .extras {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 12px;
-      font-size: 0.85rem;
-    }
-    .extras a { color: var(--brand-2); text-decoration: none; }
-    .extras a:hover { text-decoration: underline; }
-
-    .signup {
-      margin-top: 20px;
-      font-size: 0.9rem;
-    }
-    .signup a { color: var(--brand-2); text-decoration: none; }
-    .signup a:hover { text-decoration: underline; }
-
-    @media (max-width: 480px) {
-      .login-card { padding: 24px; }
-    }
-  </style>
 </head>
 <body>
-  <div class="login-card">
-    <div class="logo">
-      <img src="logoo.jpg" alt="CarePlus Hospital Logo" height="50" width="55" style="border-radius: 50%;">
-      <span>CureDash</span>
-    </div>
-    <p>Login to access</p>
-    <form action="#" method="post">
-      <div>
-        <label for="role">Login as</label>
-        <select id="role" name="role" required>
-          <option value="" disabled selected>Select role</option>
-          <option value="doctor">Doctor</option>
-          <option value="staff">Staff</option>
-          <option value="patient">Patient</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-      <div>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" placeholder="Enter username" required>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" placeholder="Enter password" required>
-      </div>
-      <button class="btn" type="submit">Login</button>
-      <div class="extras">
-        <a href="#">Forgot Password?</a>
-        <a href="#">Help</a>
-      </div>
-    </form>
-    <div class="signup">
-      New here? <a href="#">Create an account</a>
+  <div id="root">
+    <div style="text-align: center; padding: 50px;">
+      <h2>Loading CureDash Login...</h2>
     </div>
   </div>
+
+  <!-- React and Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Load JSX file -->
+  <script type="text/babel" src="login.jsx"></script>
 </body>
 </html>
