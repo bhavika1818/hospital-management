@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CureDash — Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: #0f1630;
+      --card-2: #111a3a;
+      --text: #e8ecff;
+      --muted: #a7b0d6;
+      --brand: #6aa6ff;
+      --brand-2: #87f3ff;
+      --accent: #85ffa7;
+      --danger: #ff7a7a;
+      --warning: #ffd36a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      padding: 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    header img {
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--brand-2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-card h3 {
+      color: var(--brand-2);
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .info-value {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .emergency-contact {
+      background: rgba(255, 122, 122, 0.1);
+      border: 1px solid rgba(255, 122, 122, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 10px;
+    }
+
+    .emergency-contact .info-value {
+      color: var(--danger);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    input, textarea {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: var(--card-2);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--brand-2);
+      box-shadow: 0 0 0 3px rgba(135,243,255,.25);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--muted);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #07122a;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .hours-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(255,255,255,.1);
+    }
+
+    .hours-list li:last-child {
+      border-bottom: none;
+    }
+
+    .day {
+      font-weight: 600;
+    }
+
+    .time {
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* Success message */
+    .success-message {
+      background: rgba(133, 255, 167, 0.1);
+      border: 1px solid rgba(133, 255, 167, 0.3);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .success-message h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: var(--card-2);
+      border-radius: 12px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      border: 1px dashed rgba(255,255,255,.2);
+    }
+
+    .map-placeholder span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .contact-card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.7rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logoo.jpg" alt="CureDash Logo" width="50" height="50">
+      <span>CureDash</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="department.html">Departments</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Contact & Location</h1>
+    <p class="subtitle">Get in touch or visit us</p>
+    
+    <div class="contact-container">
+      <!-- Address Card -->
+      <section class="contact-card">
+        <div>
+          <h3>📍 Address</h3>
+          <div class="contact-info">
+            <div class="info-item">
+              <span class="info-label">Hospital Address</span>
+              <span class="info-value">CureDash Hospital, MG Road, New Delhi 110001</span>
+            </div>
+            
+            <div class="info-item">
+              <span class="info-label">General Helpline</span>
+              <span class="info-value">+91 8000-000-000</span>
+            </div>
+            
+            <div class="info-item">
+              <span class="info-label">Email</span>
+              <span class="info-value">help@curedash.example</span>
+            </div>
+            
+            <div class="emergency-contact">
+              <div class="info-item">
+                <span class="info-label">24×7 Emergency & Ambulance</span>
+                <span class="info-value">+91 9000-000-000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- <div class="map-placeholder">
+          <span>🏥 Hospital Location Map</span>
+        </div> -->
+      </section>
+      
+      <!-- Feedback Form Card -->
+      <section class="contact-card">
+        <h3>💬 Feedback Form</h3>
+        <form id="feedbackForm">
+          <div class="field">
+            <label for="email">Email Address *</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" placeholder="Feedback subject" />
+          </div>
+          
+          <div class="field">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="How can we help? Please share your feedback, suggestions, or concerns..." required></textarea>
+          </div>
+          
+          <button class="btn" type="submit">Send Message</button>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+          <h3>✅ Thank You for Your Feedback!</h3>
+          <p>We have received your message and will get back to you within 24 hours.</p>
+        </div>
+      </section>
+      
+      <!-- Visiting Hours Card -->
+      <section class="contact-card">
+        <h3>🕒 Visiting Hours</h3>
+        <ul class="hours-list">
+          <li>
+            <span class="day">Outpatient (OPD)</span>
+            <span class="time">9:00 – 18:00</span>
+          </li>
+          <li>
+            <span class="day">Monday - Saturday</span>
+            <span class="time"></span>
+          </li>
+          <li style="height: 16px;"></li> <!-- Spacer -->
+          <li>
+            <span class="day">Inpatient (IPD)</span>
+            <span class="time">11:00 – 13:00</span>
+          </li>
+          <li>
+            <span class="day">Visiting Hours</span>
+            <span class="time">17:00 – 19:00</span>
+          </li>
+          <li style="height: 16px;"></li> <!-- Spacer -->
+          <li>
+            <span class="day">Emergency</span>
+            <span class="time">24×7</span>
+          </li>
+        </ul>
+        
+        <div class="muted">
+          <p><strong>Note:</strong> Carry a valid photo ID for visitor pass. Only 2 visitors per patient allowed at a time.</p>
+        </div>
+        
+        <div class="contact-info" style="margin-top: 20px;">
+          <div class="info-item">
+            <span class="info-label">Pharmacy Hours</span>
+            <span class="info-value">8:00 - 22:00 (All days)</span>
+          </div>
+          
+          <div class="info-item">
+            <span class="info-label">Cafeteria</span>
+            <span class="info-value">7:00 - 23:00 (All days)</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year">2025</span> CureDash Health Pvt. Ltd. — All Rights Reserved.
+  </footer>
+
+  <script>
+    // Handle form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      // Get form data
+      const formData = new FormData(this);
+      const feedbackData = {
+        email: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+        submittedAt: new Date().toISOString()
+      };
+      
+      // Validate required fields
+      if (!feedbackData.email || !feedbackData.message) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(feedbackData.email)) {
+        alert('Please enter a valid email address');
+        return;
+      }
+      
+      // Simulate form submission (in a real app, this would be an API call)
+      console.log('Feedback data:', feedbackData);
+      
+      // Show success message
+      document.getElementById('successMessage').classList.add('show');
+      
+      // Reset form after successful submission
+      setTimeout(() => {
+        this.reset();
+        document.getElementById('successMessage').classList.remove('show');
+      }, 5000);
+    });
+
+    // Set current year in footer
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>

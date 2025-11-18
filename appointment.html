@@ -1,0 +1,572 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CureDash — Book Appointment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: #0f1630;
+      --card-2: #111a3a;
+      --text: #e8ecff;
+      --muted: #a7b0d6;
+      --brand: #6aa6ff;
+      --brand-2: #87f3ff;
+      --accent: #85ffa7;
+      --danger: #ff7a7a;
+      --warning: #ffd36a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      padding: 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    header img {
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--brand-2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .appointment-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .form-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+    }
+
+    .info-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    input, select, textarea {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: var(--card-2);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--brand-2);
+      box-shadow: 0 0 0 3px rgba(135,243,255,.25);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--muted);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #07122a;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px dashed rgba(255,255,255,.25);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .info-card h3 {
+      margin-top: 0;
+      color: var(--brand-2);
+      margin-bottom: 16px;
+    }
+
+    .info-card ul {
+      padding-left: 20px;
+      margin-bottom: 24px;
+    }
+
+    .info-card li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .contact-info {
+      margin: 20px 0;
+    }
+
+    .contact-info p {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Success message */
+    .success-message {
+      background: rgba(133, 255, 167, 0.1);
+      border: 1px solid rgba(133, 255, 167, 0.3);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .success-message h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Required field indicator */
+    .required::after {
+      content: " *";
+      color: var(--danger);
+    }
+
+    @media (max-width: 900px) {
+      .appointment-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .form-card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logoo.jpg" alt="CureDash Logo" width="50" height="50">
+      <span>CureDash</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="department.html">Departments</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li><a href="appointment.html" class="active">Appointment</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Book an Appointment</h1>
+    
+    <div class="appointment-container">
+      <section class="form-card">
+        <form id="appointmentForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="fullName" class="required">Full Name</label>
+              <input id="fullName" name="fullName" type="text" placeholder="Your full name" required />
+            </div>
+            <div class="field">
+              <label for="phone" class="required">Phone Number</label>
+              <input id="phone" name="phone" type="tel" placeholder="+91 XXXXXXXXXX" pattern="^[+0-9][0-9\-\s]{6,}$" required />
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" placeholder="your.email@example.com" />
+            </div>
+            <div class="field">
+              <label for="age">Age</label>
+              <input id="age" name="age" type="number" placeholder="Your age" min="1" max="120" />
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="field">
+              <label for="dept" class="required">Department</label>
+              <select id="dept" name="dept" required>
+                <option value="" disabled selected>Select department</option>
+                <option value="cardiology">Cardiology</option>
+                <option value="neurology">Neurology</option>
+                <option value="orthopedics">Orthopedics</option>
+                <option value="general-medicine">General Medicine</option>
+                <option value="obstetrics-gynae">Obstetrics & Gynae</option>
+                <option value="oncology">Oncology</option>
+                <option value="pediatrics">Pediatrics</option>
+                <option value="dermatology">Dermatology</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="doctor">Preferred Doctor</label>
+              <select id="doctor" name="doctor">
+                <option value="" selected>Any available doctor</option>
+                <option value="dr-krish-sharma">Dr. Krish Sharma</option>
+                <option value="dr-anya-mehta">Dr. Anya Mehta</option>
+                <option value="dr-rudra-rathore">Dr. Rudra Rathore</option>
+                <option value="dr-simran-kaur">Dr. Simran Kaur</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="field">
+              <label for="date" class="required">Preferred Date</label>
+              <input id="date" name="date" type="date" required />
+            </div>
+            <div class="field">
+              <label for="time" class="required">Preferred Time</label>
+              <select id="time" name="time" required>
+                <option value="" disabled selected>Select time slot</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+                <option value="17:00">05:00 PM</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label for="notes">Reason for Visit / Notes</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Please describe your symptoms or reason for appointment"></textarea>
+          </div>
+          
+          <div class="btn-row">
+            <button class="btn primary" type="submit">Book Appointment</button>
+            <button class="btn ghost" type="reset">Clear Form</button>
+          </div>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+          <h3>✅ Appointment Request Submitted Successfully!</h3>
+          <p>We have received your appointment request. Our team will contact you within 24 hours to confirm your appointment.</p>
+          <p>You will receive a confirmation SMS and email shortly.</p>
+        </div>
+      </section>
+      
+      <aside class="info-card">
+        <h3>Why book online?</h3>
+        <ul>
+          <li>Faster check‑in at reception</li>
+          <li>Choose preferred slot & doctor</li>
+          <li>Receive SMS confirmation</li>
+          <li>Easy rescheduling</li>
+          <li>Digital reminders</li>
+        </ul>
+        
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <p><strong>Phone:</strong> +91 8000-000-000</p>
+          <p><strong>Email:</strong> appointments@curedash.example</p>
+          <p><strong>Hours:</strong> Mon-Sat, 9:00 AM - 6:00 PM</p>
+        </div>
+        
+        <h3>Emergency?</h3>
+        <p>For medical emergencies, please visit our emergency department directly or call our 24/7 emergency helpline:</p>
+        <p><strong>Emergency:</strong> +91 9000-000-000</p>
+        
+        <p class="muted">This form integrates with our backend system to save appointment requests.</p>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year">2025</span> CureDash Health Pvt. Ltd. — All Rights Reserved.
+  </footer>
+
+  <script>
+    // Set minimum date to today
+    document.addEventListener('DOMContentLoaded', function() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('date').min = today;
+      
+      // Set year in footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+      
+      // Update doctor options based on department selection
+      document.getElementById('dept').addEventListener('change', function() {
+        updateDoctorOptions(this.value);
+      });
+    });
+
+    // Function to update doctor options based on department
+    function updateDoctorOptions(department) {
+      const doctorSelect = document.getElementById('doctor');
+      const currentValue = doctorSelect.value;
+      
+      // Clear existing options except the first one
+      while (doctorSelect.options.length > 1) {
+        doctorSelect.remove(1);
+      }
+      
+      // Define doctors by department
+      const doctorsByDept = {
+        'cardiology': [
+          { value: 'dr-krish-sharma', name: 'Dr. Krish Sharma' },
+          { value: 'dr-diksha-bansal', name: 'Dr. Diksha Bansal' },
+          { value: 'dr-aasman-singh', name: 'Dr. Aasman Singh' }
+        ],
+        'neurology': [
+          { value: 'dr-rudra-rathore', name: 'Dr. Rudra Rathore' },
+          { value: 'dr-simran-kaur', name: 'Dr. Simran Kaur' },
+          { value: 'dr-naman-dhingra', name: 'Dr. Naman Dhingra' }
+        ],
+        'orthopedics': [
+          { value: 'dr-anya-mehta', name: 'Dr. Anya Mehta' },
+          { value: 'dr-rohan-mehta', name: 'Dr. Rohan Mehta' },
+          { value: 'dr-kairi-kansal', name: 'Dr. Kairi Kansal' }
+        ],
+        'general-medicine': [
+          { value: 'dr-neel-joshi', name: 'Dr. Neel Joshi' },
+          { value: 'dr-rhea-kapoor', name: 'Dr. Rhea Kapoor' },
+          { value: 'dr-arjun-mehta', name: 'Dr. Arjun Mehta' }
+        ],
+        'obstetrics-gynae': [
+          { value: 'dr-tara-joshi', name: 'Dr. Tara Joshi' },
+          { value: 'dr-meera-singh', name: 'Dr. Meera Singh' }
+        ],
+        'oncology': [
+          { value: 'dr-anika-malhotra', name: 'Dr. Anika Malhotra' },
+          { value: 'dr-kabir-singh', name: 'Dr. Kabir Singh' }
+        ],
+        'pediatrics': [
+          { value: 'dr-aarav-gupta', name: 'Dr. Aarav Gupta' },
+          { value: 'dr-ishita-sharma', name: 'Dr. Ishita Sharma' }
+        ],
+        'dermatology': [
+          { value: 'dr-aisha-patel', name: 'Dr. Aisha Patel' },
+          { value: 'dr-vihaan-kapoor', name: 'Dr. Vihaan Kapoor' }
+        ]
+      };
+      
+      // Add doctors for selected department
+      if (doctorsByDept[department]) {
+        doctorsByDept[department].forEach(doctor => {
+          const option = document.createElement('option');
+          option.value = doctor.value;
+          option.textContent = doctor.name;
+          doctorSelect.appendChild(option);
+        });
+      }
+      
+      // Restore previous selection if still available
+      if (currentValue && Array.from(doctorSelect.options).some(opt => opt.value === currentValue)) {
+        doctorSelect.value = currentValue;
+      }
+    }
+
+    // Handle form submission
+    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      // Get form data
+      const formData = new FormData(this);
+      const appointmentData = {
+        fullName: formData.get('fullName'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        age: formData.get('age'),
+        department: formData.get('dept'),
+        doctor: formData.get('doctor'),
+        date: formData.get('date'),
+        time: formData.get('time'),
+        notes: formData.get('notes'),
+        submittedAt: new Date().toISOString()
+      };
+      
+      // Validate required fields
+      if (!appointmentData.fullName || !appointmentData.phone || !appointmentData.department || 
+          !appointmentData.date || !appointmentData.time) {
+        alert('Please fill in all required fields (marked with *)');
+        return;
+      }
+      
+      // Validate phone number
+      const phoneRegex = /^[+0-9][0-9\-\s]{6,}$/;
+      if (!phoneRegex.test(appointmentData.phone)) {
+        alert('Please enter a valid phone number');
+        return;
+      }
+      
+      // Validate date (should not be in the past)
+      const selectedDate = new Date(appointmentData.date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (selectedDate < today) {
+        alert('Please select a future date for your appointment');
+        return;
+      }
+      
+      // Simulate form submission (in a real app, this would be an API call)
+      console.log('Appointment data:', appointmentData);
+      
+      // Show success message
+      document.getElementById('successMessage').classList.add('show');
+      
+      // Reset form after successful submission
+      setTimeout(() => {
+        this.reset();
+        document.getElementById('successMessage').classList.remove('show');
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CureDash — Doctor Timetable</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1020;
+    --bg-soft: #121933;
+    --card: #0f1630;
+    --card-2: #111a3a;
+    --text: #e8ecff;
+    --muted: #a7b0d6;
+    --brand: #6aa6ff;
+    --brand-2: #87f3ff;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+    --radius: 16px;
+  }
+
+  body {
+    background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: all 0.4s ease;
+    padding: 40px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin-bottom: 30px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.3rem;
+  }
+
+  header img { border-radius: 50%; }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+  }
+
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  nav a:hover { color: var(--brand-2); }
+
+  .hero {
+    max-width: 1100px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .filter-bar {
+    background: var(--card-2);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 20px;
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .filter-bar label {
+    font-weight: 600;
+  }
+
+  .filter-bar select {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 1rem;
+  }
+
+  .table-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    overflow-x: auto;
+    max-width: 1100px;
+    width: 100%;
+    transition: all 0.4s ease;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: var(--text);
+    min-width: 800px;
+  }
+
+  th, td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    white-space: nowrap;
+  }
+
+  th {
+    color: var(--brand-2);
+    font-weight: 600;
+    background: rgba(255,255,255,.05);
+  }
+
+  tr:hover td {
+    background: rgba(255,255,255,.05);
+  }
+
+  .legend {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  footer {
+    margin-top: 80px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* Subtle animations */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+  }
+
+  [data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logoo.jpg" alt="CureDash Logo" width="50" height="50">
+      <span>CureDash</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li><a href="timetable.html">Timetable</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" data-animate>
+    <h1>Doctor OPD Timetable</h1>
+    <p>
+      Plan your hospital visits effortlessly with our organized OPD schedule.  
+      Check timings for each department and doctor, ensuring your healthcare experience  
+      is smooth and well-planned — because your time and health matter most.
+    </p>
+  </section>
+
+  <section class="filter-bar" data-animate>
+    <label for="deptFilter">Filter by Department:</label>
+    <select id="deptFilter">
+      <option value="all">All Departments</option>
+    </select>
+  </section>
+
+  <section class="table-card" data-animate>
+    <table id="timetable">
+      <thead>
+        <tr>
+          <th>Doctor</th>
+          <th>Department</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <div class="legend" data-animate>
+    <p>🕒 Morning Shift: 9AM–1PM • Afternoon Shift: 2PM–6PM • Closed: —</p>
+  </div>
+
+  <footer>
+    © <span id="year">2025</span> CureDash Health Pvt. Ltd. — All Rights Reserved.
+  </footer>
+
+  <script>
+    // JSON DATA
+    const timetableJSON = {
+      doctors: [
+        { name: "Dr. Krish Sharma", dept: "Cardiology", schedule: ["10–1", "—", "10–1", "—", "2–5", "10–1"] },
+        { name: "Dr. Anya Mehta", dept: "Orthopedics", schedule: ["—", "11–2", "—", "3-4", "—", "7-10"] },
+        { name: "Dr. Bhavika Kansal", dept: "Neurology", schedule: ["9-12", "—", "—", "2–5", "—", "7-9"] },
+        { name: "Dr. Rohan Mehta", dept: "Pediatrics", schedule: ["10–1", "10–1", "—", "2–5", "—", "10–1"] },
+        { name: "Dr. Aisha Patel", dept: "Dermatology", schedule: ["—", "2–5", "—", "10–1", "—", "2–5"] },
+        { name: "Dr. Rudra Rathore", dept: "Oncology", schedule: ["—", "10–1", "2–5", "—", "2–5", "10–1"] },
+        { name: "Dr. Tara Joshi", dept: "ENT", schedule: ["—", "2–5", "—", "10–1", "—", "2–5"] },
+        { name: "Dr. Diksha Bansal", dept: "Cardiology", schedule: ["8-11", "—", "1-3", "—", "5-8", "—"] },
+        { name: "Dr. Aasman Singh", dept: "Cardiology", schedule: ["—", "11–2", "—", "3-4", "—", "7-10"] },
+        { name: "Dr. Ayush Verma", dept: "Cardiology", schedule: ["7-11", "—", "1-3", "—", "6-10", "—"] },
+        { name: "Dr. Kairi Kansal", dept: "Orthopedics", schedule: ["8-11", "—", "1-3", "—", "5-8", "—"] },
+        { name: "Dr. Prince Sharma", dept: "Orthopedics", schedule: ["—", "11–2", "—", "11–2", "—", "11–2"] },
+        { name: "Dr. Riya Bansal", dept: "Orthopedics", schedule: ["7-11", "—", "1-3", "—", "6-10", "—"] },
+        { name: "Dr. Rudra Rathore", dept: "Orthopedics", schedule: ["—", "—", "1-5", "—", "-", "9-12"] },
+        { name: "Dr. Naman Dhingra", dept: "Neurology", schedule: ["—", "11–2", "—", "3-4", "—", "7-10"] },
+        { name: "Dr. Bhumi Goyal", dept: "Neurology", schedule: ["8-11", "—", "1-3", "—", "5-8", "—"] },
+        { name: "Dr. Aryan Sharma", dept: "Neurology", schedule: ["7-11", "—", "1-3", "—", "6-10", "—"] },
+        { name: "Dr. Simran Kaur", dept: "Neurology", schedule: ["—", "—", "9–12", "—", "9–12", "—"] },
+        { name: "Dr. Meera Singh", dept: "Pediatrics", schedule: ["—", "2–5", "—", "10–1", "—", "2–5"] },
+        { name: "Dr. Aarav Gupta", dept: "Pediatrics", schedule: ["9–12", "—", "9–12", "2–5", "—", "—"] },
+        { name: "Dr. Ishita Sharma", dept: "Pediatrics", schedule: ["10–1", "10–1", "10–1", "—", "2–5", "—"] },
+        { name: "Dr. Vihaan Kapoor", dept: "Dermatology", schedule: ["9–12", "—", "9–12", "2–5", "—", "—"] },
+        { name: "Dr. Myra Shah", dept: "Dermatology", schedule: ["10–1", "10–1", "10–1", "—", "2–5", "—"] },
+        { name: "Dr. Anika Malhotra", dept: "Oncology", schedule: ["9–12", "—", "9–12", "2–5", "—", "—"] },
+        { name: "Dr. Kabir Singh", dept: "Oncology", schedule: ["10–1", "10–1", "10–1", "—", "2–5", "—"] },
+        { name: "Dr. Kavita Rao", dept: "ENT", schedule: ["9–12", "—", "9–12", "2–5", "—", "—"] },
+        { name: "Dr. Neel Joshi", dept: "General Medicine", schedule: ["10–1", "10–1", "10–1", "—", "2–5", "—"] },
+        { name: "Dr. Rhea Kapoor", dept: "General Medicine", schedule: ["—", "2–5", "—", "10–1", "—", "2–5"] },
+        { name: "Dr. Arjun Mehta", dept: "General Medicine", schedule: ["9–12", "—", "9–12", "2–5", "—", "—"] },
+      ],
+      responsive: {
+        breakpoints: {
+          small: { maxWidth: 480, padding: "16px", tableFont: "0.8rem" },
+          medium: { maxWidth: 768, padding: "28px", tableFont: "0.9rem" },
+          large: { maxWidth: 1200, padding: "40px", tableFont: "1rem" }
+        }
+      }
+    };
+
+    // FUNCTIONS
+    function populateDeptFilter() {
+      const depts = [...new Set(timetableJSON.doctors.map(d => d.dept))];
+      const filter = document.getElementById("deptFilter");
+      depts.forEach(dep => {
+        const opt = document.createElement("option");
+        opt.value = dep;
+        opt.textContent = dep;
+        filter.appendChild(opt);
+      });
+    }
+
+    function renderTable(filter = "all") {
+      const tbody = document.querySelector("#timetable tbody");
+      tbody.innerHTML = "";
+      const filtered = filter === "all" ? timetableJSON.doctors : timetableJSON.doctors.filter(d => d.dept === filter);
+      filtered.forEach(doc => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${doc.name}</td>
+          <td>${doc.dept}</td>
+          <td>${doc.schedule[0]}</td>
+          <td>${doc.schedule[1]}</td>
+          <td>${doc.schedule[2]}</td>
+          <td>${doc.schedule[3]}</td>
+          <td>${doc.schedule[4]}</td>
+          <td>${doc.schedule[5]}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function applyResponsive() {
+      const width = window.innerWidth;
+      const table = document.getElementById("timetable");
+      let layout;
+      if (width <= timetableJSON.responsive.breakpoints.small.maxWidth) {
+        layout = timetableJSON.responsive.breakpoints.small;
+      } else if (width <= timetableJSON.responsive.breakpoints.medium.maxWidth) {
+        layout = timetableJSON.responsive.breakpoints.medium;
+      } else {
+        layout = timetableJSON.responsive.breakpoints.large;
+      }
+      document.body.style.padding = layout.padding;
+      table.style.fontSize = layout.tableFont;
+    }
+
+    function animateOnScroll() {
+      document.querySelectorAll("[data-animate]").forEach(el => {
+        const rect = el.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (rect < windowHeight - 100) el.classList.add("visible");
+      });
+    }
+
+    // INIT
+    populateDeptFilter();
+    renderTable();
+    applyResponsive();
+    animateOnScroll();
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // EVENTS
+    document.getElementById("deptFilter").addEventListener("change", e => renderTable(e.target.value));
+    window.addEventListener("resize", applyResponsive);
+    window.addEventListener("scroll", animateOnScroll);
+  </script>
+</body>
+</html>

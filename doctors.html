@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CureDash — Doctors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: #0f1630;
+      --card-2: #111a3a;
+      --text: #e8ecff;
+      --muted: #a7b0d6;
+      --brand: #6aa6ff;
+      --brand-2: #87f3ff;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      padding: 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    header img {
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--brand-2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+      max-width: 1200px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      height: 220px;
+    }
+
+    .card .name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 12px;
+    }
+
+    .card .role {
+      color: var(--brand-2);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .card .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logoo.jpg" alt="CureDash Logo" width="50" height="50">
+      <span>CureDash</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="department.html">Departments</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li><a href="#">Doctors</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Meet Our Doctors</h1>
+    <section class="grid" id="doctorsGrid">
+      <!-- Doctor cards will be injected via JSON -->
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year">2025</span> CureDash Health Pvt. Ltd. — All Rights Reserved.
+  </footer>
+
+  <script>
+    // JSON: Doctors Data + Responsive Breakpoints
+    const pageData = {
+      doctors: [
+        {
+          name: "Dr. Krish Sharma",
+          role: "Cardiologist • MD, DM",
+          info: "7+ years experience in coronary interventions.",
+          image: "doc1.jpg"
+        },
+        {
+          name: "Dr. Anya Mehta",
+          role: "Orthopedic Surgeon • MS, MCh",
+          info: "Specialist in joint replacements and sports injuries.",
+          image: "doc2.jpg"
+        },
+        {
+          name: "Dr. Rudra Rathore",
+          role: "Neurologist • MD, DM",
+          info: "Expert in epilepsy, stroke, and movement disorders.",
+          image: "doc3.jpg"
+        },
+        {
+          name: "Dr. Simran Kaur",
+          role: "Oncologist • MD, DM",
+          info: "Focused on precision chemotherapy and cancer care.",
+          image: "doc4.jpg"
+        },
+        {
+          name: "Dr. Rohan Mehta",
+          role: "Pediatrician • MD",
+          info: "Child health and neonatal intensive care specialist.",
+          image: "doc5.jpg"
+        },
+        {
+          name: "Dr. Aisha Patel",
+          role: "Dermatologist • MD",
+          info: "Expert in cosmetic dermatology and skin therapy.",
+          image: "doc6.jpg"
+        }
+      ],
+      responsive: {
+        breakpoints: {
+          small: { maxWidth: 480, columns: 1, gap: "16px", padding: "20px" },
+          medium: { maxWidth: 768, columns: 2, gap: "20px", padding: "30px" },
+          large: { maxWidth: 1200, columns: 3, gap: "24px", padding: "40px" }
+        }
+      }
+    };
+
+    // Function to generate doctor cards
+    function renderDoctors() {
+      const grid = document.getElementById("doctorsGrid");
+      grid.innerHTML = "";
+      pageData.doctors.forEach(doc => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${doc.image}" alt="Portrait of ${doc.name}">
+          <div class="name">${doc.name}</div>
+          <div class="role">${doc.role}</div>
+          <p class="muted">${doc.info}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Responsive layout handler
+    function applyResponsiveLayout() {
+      const width = window.innerWidth;
+      const grid = document.getElementById("doctorsGrid");
+      let layout;
+
+      if (width <= pageData.responsive.breakpoints.small.maxWidth) {
+        layout = pageData.responsive.breakpoints.small;
+      } else if (width <= pageData.responsive.breakpoints.medium.maxWidth) {
+        layout = pageData.responsive.breakpoints.medium;
+      } else {
+        layout = pageData.responsive.breakpoints.large;
+      }
+
+      grid.style.gridTemplateColumns = `repeat(${layout.columns}, 1fr)`;
+      grid.style.gap = layout.gap;
+      document.body.style.padding = layout.padding;
+    }
+
+    // Initialize
+    renderDoctors();
+    applyResponsiveLayout();
+
+    window.addEventListener("resize", applyResponsiveLayout);
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CureDash — Pharmacy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: #0f1630;
+      --card-2: #111a3a;
+      --text: #e8ecff;
+      --muted: #a7b0d6;
+      --brand: #6aa6ff;
+      --brand-2: #87f3ff;
+      --accent: #85ffa7;
+      --danger: #ff7a7a;
+      --warning: #ffd36a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      padding: 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    header img {
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--brand-2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .pharmacy-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      color: var(--text);
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    th {
+      color: var(--brand-2);
+      font-weight: 600;
+      background: rgba(255,255,255,.05);
+    }
+
+    tr:hover td {
+      background: rgba(255,255,255,.05);
+    }
+
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-instock {
+      background: rgba(133, 255, 167, 0.2);
+      color: var(--accent);
+    }
+    .status-lowstock {
+      background: rgba(255, 211, 106, 0.2);
+      color: var(--warning);
+    }
+    .status-outofstock {
+      background: rgba(255, 122, 122, 0.2);
+      color: var(--danger);
+    }
+
+    .action-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: all 0.2s ease;
+    }
+    .action-btn:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    .summary-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(255,255,255,.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #001028;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      margin-top: 10px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .search-bar {
+      background: var(--card-2);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 20px;
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .search-bar input {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      flex-grow: 1;
+      min-width: 250px;
+    }
+
+    .search-bar button {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #001028;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .search-bar button:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .pharmacy-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-bar input {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logoo.jpg" alt="CureDash Logo" width="50" height="50">
+      <span>CureDash</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="patient-records.html">Patient Records</a></li>
+        <li><a href="billing.html">Billing</a></li>
+        <li><a href="lab-results.html">Lab Results</a></li>
+        <li><a href="pharmacy.html" class="active">Pharmacy</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Pharmacy Inventory</h1>
+    
+    <section class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by medicine name or category...">
+      <button id="searchBtn">Search</button>
+    </section>
+    
+    <div class="pharmacy-container">
+      <section class="table-card">
+        <table id="pharmacyTable">
+          <thead>
+            <tr>
+              <th>Medicine ID</th>
+              <th>Medicine Name</th>
+              <th>Category</th>
+              <th>Stock</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="pharmacyTableBody">
+            <!-- Pharmacy data will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="summary-card">
+        <h3>Inventory Summary</h3>
+        <div class="summary-item">
+          <span>Total Medicines:</span>
+          <span id="totalMedicines">0</span>
+        </div>
+        <div class="summary-item">
+          <span>In Stock:</span>
+          <span id="inStockCount">0</span>
+        </div>
+        <div class="summary-item">
+          <span>Low Stock:</span>
+          <span id="lowStockCount">0</span>
+        </div>
+        <div class="summary-item">
+          <span>Out of Stock:</span>
+          <span id="outOfStockCount">0</span>
+        </div>
+        <button class="btn-primary" id="addMedicineBtn">Add New Medicine</button>
+        <button class="btn-primary" id="orderStockBtn">Order Stock</button>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year">2025</span> CureDash Health Pvt. Ltd. — All Rights Reserved.
+  </footer>
+
+  <script>
+    // Pharmacy Data
+    const pharmacyData = {
+      medicines: [
+        {
+          id: "MED001",
+          name: "Paracetamol 500mg",
+          category: "Analgesic",
+          stock: 150,
+          price: 5,
+          status: "In Stock"
+        },
+        {
+          id: "MED002",
+          name: "Amoxicillin 250mg",
+          category: "Antibiotic",
+          stock: 80,
+          price: 12,
+          status: "In Stock"
+        },
+        {
+          id: "MED003",
+          name: "Atorvastatin 10mg",
+          category: "Cardiovascular",
+          stock: 15,
+          price: 25,
+          status: "Low Stock"
+        },
+        {
+          id: "MED004",
+          name: "Metformin 500mg",
+          category: "Antidiabetic",
+          stock: 120,
+          price: 8,
+          status: "In Stock"
+        },
+        {
+          id: "MED005",
+          name: "Losartan 50mg",
+          category: "Cardiovascular",
+          stock: 0,
+          price: 18,
+          status: "Out of Stock"
+        },
+        {
+          id: "MED006",
+          name: "Omeprazole 20mg",
+          category: "Gastrointestinal",
+          stock: 25,
+          price: 15,
+          status: "Low Stock"
+        }
+      ]
+    };
+
+    // Function to render pharmacy table
+    function renderPharmacyTable(medicines = pharmacyData.medicines) {
+      const tbody = document.getElementById("pharmacyTableBody");
+      tbody.innerHTML = "";
+      
+      medicines.forEach(medicine => {
+        const row = document.createElement("tr");
+        let statusClass = "";
+        if (medicine.status === "In Stock") statusClass = "status-instock";
+        else if (medicine.status === "Low Stock") statusClass = "status-lowstock";
+        else if (medicine.status === "Out of Stock") statusClass = "status-outofstock";
+        
+        row.innerHTML = `
+          <td>${medicine.id}</td>
+          <td>${medicine.name}</td>
+          <td>${medicine.category}</td>
+          <td>${medicine.stock}</td>
+          <td>₹${medicine.price}</td>
+          <td><span class="status-badge ${statusClass}">${medicine.status}</span></td>
+          <td>
+            <button class="action-btn" onclick="viewMedicine('${medicine.id}')">View</button>
+            <button class="action-btn" onclick="editMedicine('${medicine.id}')">Edit</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      
+      updateInventorySummary();
+    }
+
+    // Function to update inventory summary
+    function updateInventorySummary() {
+      const totalMedicines = pharmacyData.medicines.length;
+      const inStockCount = pharmacyData.medicines.filter(m => m.status === "In Stock").length;
+      const lowStockCount = pharmacyData.medicines.filter(m => m.status === "Low Stock").length;
+      const outOfStockCount = pharmacyData.medicines.filter(m => m.status === "Out of Stock").length;
+      
+      document.getElementById("totalMedicines").textContent = totalMedicines;
+      document.getElementById("inStockCount").textContent = inStockCount;
+      document.getElementById("lowStockCount").textContent = lowStockCount;
+      document.getElementById("outOfStockCount").textContent = outOfStockCount;
+    }
+
+    // Search functionality
+    function searchMedicines() {
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+      const filteredMedicines = pharmacyData.medicines.filter(medicine => 
+        medicine.name.toLowerCase().includes(searchTerm) ||
+        medicine.category.toLowerCase().includes(searchTerm) ||
+        medicine.id.toLowerCase().includes(searchTerm)
+      );
+      renderPharmacyTable(filteredMedicines);
+    }
+
+    // Placeholder functions for actions
+    function viewMedicine(id) {
+      alert(`Viewing details for medicine ID: ${id}`);
+      // In a real application, this would show medicine details
+    }
+
+    function editMedicine(id) {
+      alert(`Editing medicine record for ID: ${id}`);
+      // In a real application, this would open an edit form
+    }
+
+    // Initialize
+    document.addEventListener("DOMContentLoaded", function() {
+      renderPharmacyTable();
+      document.getElementById("searchBtn").addEventListener("click", searchMedicines);
+      document.getElementById("searchInput").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+          searchMedicines();
+        }
+      });
+      document.getElementById("addMedicineBtn").addEventListener("click", function() {
+        alert("Opening form to add new medicine...");
+        // In a real application, this would open a form to add medicine
+      });
+      document.getElementById("orderStockBtn").addEventListener("click", function() {
+        alert("Opening stock ordering interface...");
+        // In a real application, this would open stock ordering interface
+      });
+      document.getElementById("year").textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>

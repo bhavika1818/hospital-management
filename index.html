@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CarePlus Hospital — Management System (Demo)</title>
+  <meta name="description" content="A clean, responsive Hospital Management System demo website built with only HTML & CSS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="container topbar" id="home">
+    <a class="logo" href="#home" aria-label="CarePlus Hospital Home">
+      <img src="logoo.jpg" alt="CarePlus Hospital Logo" height="50" width="55" style="border-radius: 50%;">
+      <span class="title">CureDash</span>
+    </a>
+    <nav aria-label="Primary Navigation">
+      <ul>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="department.html">Departments</a></li>
+        <!-- <li><a href="doctors.html">Doctors</a></li> -->
+        <li><a href="timetable.html">Timetable</a></li>
+        <li><a href="appointment.html" class="cta-btn">Book Appointment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="container hero">
+    <div class="hero-card">
+      <div>
+        <span class="pill">24×7 Emergency • ISO 9001 Certified</span>
+        <h1>Compassionate care, modern facilities.</h1>
+        <p>
+        CureDash is a modern, patient-centric healthcare center committed to delivering compassionate care and advanced medical treatments. With expert doctors and state-of-the-art facilities, it ensures quality healthcare for every patient.
+        </p>
+        <div class="badges">
+          <span class="badge">OPD & IPD</span>
+          <span class="badge">Digital Records</span>
+          <span class="badge">Lab & Pharmacy</span>
+          <span class="badge">Insurance Desk</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="appointment.html">Book Appointment</a>
+          <a class="btn ghost" href="#contact">Emergency: +91 8000-000-000</a>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div class="kpis">
+          <div class="kpi"><div class="num">120+</div><div class="lbl">Doctors</div></div>
+          <div class="kpi"><div class="num">30</div><div class="lbl">Departments</div></div>
+          <div class="kpi"><div class="num">350</div><div class="lbl">Beds</div></div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Quick Links</h3>
+          <br>
+          <div class="badges">
+            <a class="badge" href="patient.html">Patient Records</a>
+            <a class="badge" href="billing.html">Billing</a>
+            <a class="badge" href="lab.html">Lab Results</a>
+            <a class="badge" href="pharmacy.html">Pharmacy</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+   <!-- Services -->
+  <section id="services" class="container">
+    <div class="section-title">
+      <h2>Core Services</h2>
+    </div>
+    <div class="grid cols-3">
+      <article class="card">
+        <h3>Outpatient (OPD)</h3>
+        <p>Walk‑in consultations, appointment scheduling, and e‑prescriptions.</p>
+      </article>
+      <article class="card">
+        <h3>Inpatient (IPD)</h3>
+        <p>Admission, bed management, nurse rounds, diet & discharge summary.</p>
+      </article>
+      <article class="card">
+        <h3>Emergency</h3>
+        <p>24×7 triage, trauma care, rapid diagnostics and critical care pathways.</p>
+      </article>
+      <article class="card">
+        <h3>Laboratory</h3>
+        <p>Sample collection, LIMS integration, report uploads and notifications.</p>
+      </article>
+      <article class="card">
+        <h3>Pharmacy</h3>
+        <p>Drug inventory, e‑prescription sync, billing and refill reminders.</p>
+      </article>
+      <article class="card">
+        <h3>Billing & Insurance</h3>
+        <p>OPD & IPD billing, cashless claims, packages and audit trails.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider container" aria-hidden="true"></div>
+
+  <!-- Departments -->
+  <section id="departments" class="container">
+    <div class="section-title">
+      <h2>Departments</h2>
+      <p>Specialties available at CureDash</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="card dept">
+        <div class="icon">❤</div>
+        <div>
+          <h3>Cardiology</h3>
+          <p>Non‑invasive cardiology, cath lab, and cardiac rehab.</p>
+        </div>
+      </div>
+      <div class="card dept">
+        <div class="icon">🧠</div>
+        <div>
+          <h3>Neurology</h3>
+          <p>Stroke unit, EEG/EMG, epilepsy clinic and neuro‑rehab.</p>
+        </div>
+      </div>
+      <div class="card dept">
+        <div class="icon">🦴</div>
+        <div>
+          <h3>Orthopedics</h3>
+          <p>Joint replacement, sports injuries and spinal surgery.</p>
+        </div>
+      </div>
+      <div class="card dept">
+        <div class="icon">🩺</div>
+        <div>
+          <h3>General Medicine</h3>
+          <p>Comprehensive primary care & preventive health checks.</p>
+        </div>
+      </div>
+      <div class="card dept">
+        <div class="icon">🍼</div>
+        <div>
+          <h3>Obstetrics & Gynae</h3>
+          <p>Antenatal care, delivery suites, NICU and fertility.</p>
+        </div>
+      </div>
+      <div class="card dept">
+        <div class="icon">🧪</div>
+        <div>
+          <h3>Oncology</h3>
+          <p>Day‑care chemo, radiation therapy & tumor board.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Timetable -->
+  <section id="timetable" class="container">
+    <div class="section-title">
+      <h2>OPD Timetable</h2>
+    </div>
+    <div class="card">
+      <div style="overflow:auto">
+        <table aria-label="Doctor OPD Timetable">
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Department</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dr. Krish Sharma</td><td>Cardiology</td><td>10–1</td><td>—</td><td>10–1</td><td>—</td><td>2–5</td><td>10–1</td>
+            </tr>
+            <tr>
+              <td>Dr. Rohan Mehta</td><td>Orthopedics</td><td>—</td><td>11–2</td><td>—</td><td>11–2</td><td>—</td><td>11–2</td>
+            </tr>
+            <tr>
+              <td>Dr. Simran Kaur</td><td>Neurology</td><td>9–12</td><td>—</td><td>9–12</td><td>—</td><td>9–12</td><td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+   <!-- Doctors -->
+  <section id="doctors" class="container">
+    <div class="section-title">
+      <h2>Our Doctors</h2>
+      <p>Board‑certified, patient‑first clinicians</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="card doc">
+        <img src="doc1.jpg" alt="Portrait of Dr. A Sharma"/>
+        <div>
+          <div class="name">Dr. Krish Sharma</div>
+          <div class="role">Cardiologist • MD, DM</div>
+          <p class="muted">7+ yrs experience in coronary interventions.</p>
+        </div>
+      </div>
+      <div class="card doc">
+        <img src="doc2.jpg" alt="Portrait of Dr. R Mehta"/>
+        <div>
+          <div class="name">Dr. Anya Mehta</div>
+          <div class="role">Orthopedic Surgeon • MS, MCh</div>
+          <p class="muted">Sports injuries & joint replacement specialist.</p>
+        </div>
+      </div>
+      <div class="card doc">
+        <img src="doc3.jpg" alt="Portrait of Dr. S Kaur"/>
+        <div>
+          <div class="name">Dr. Rudra Rathore</div>
+          <div class="role">Neurologist • MD, DM</div>
+          <p class="muted">Epilepsy, stroke & movement disorders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Records & Bed Management (Demo) -->
+  <section id="records" class="container">
+    <div class="section-title">
+      <h2>Bed & Room Availability</h2>
+    </div>
+    <div class="card" style="overflow:auto">
+      <table aria-label="Bed Availability">
+        <thead>
+          <tr>
+            <th>Ward</th>
+            <th>Type</th>
+            <th>Total Beds</th>
+            <th>Occupied</th>
+            <th>Available</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A1</td><td>General</td><td>40</td><td>30</td><td>10</td>
+            <td><span class="badge" style="border-color:rgba(133,255,167,.4);color:var(--accent)">Open</span></td>
+          </tr>
+          <tr>
+            <td>B2</td><td>Private</td><td>20</td><td>19</td><td>1</td>
+            <td><span class="badge" style="border-color:rgba(255,211,106,.4);color:var(--warning)">Tight</span></td>
+          </tr>
+          <tr>
+            <td>C3</td><td>ICU</td><td>12</td><td>12</td><td>0</td>
+            <td><span class="badge" style="border-color:rgba(255,122,122,.4);color:var(--danger)">Full</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div class="foot-brand">
+        <div class="logo" style="margin-bottom:8px">
+          <img src="logoo.jpg" alt="CarePlus Hospital Logo" height="50" width="55" style="border-radius: 50%;">
+          <span class="title">CureDash</span>
+        </div>
+        <p class="muted">© <span id="year">2025</span> CureDash Health Pvt. Ltd. • </p>
+      </div>
+      <div class="foot-col">
+        <h4>Hospital</h4>
+        <a href="#services">Services</a>
+        <a href="#departments">Departments</a>
+        <a href="#doctors">Doctors</a>
+      </div>
+      <div class="foot-col">
+        <h4>Management</h4>
+        <a href="#records">Beds</a>
+        <a href="#billing">Billing</a>
+        <a href="#lab">Lab</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

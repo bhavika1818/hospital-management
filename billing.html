@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CureDash — Billing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: #0f1630;
+      --card-2: #111a3a;
+      --text: #e8ecff;
+      --muted: #a7b0d6;
+      --brand: #6aa6ff;
+      --brand-2: #87f3ff;
+      --accent: #85ffa7;
+      --danger: #ff7a7a;
+      --warning: #ffd36a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      padding: 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    header img {
+      border-radius: 50%;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--brand-2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .billing-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .table-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      color: var(--text);
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    th {
+      color: var(--brand-2);
+      font-weight: 600;
+      background: rgba(255,255,255,.05);
+    }
+
+    tr:hover td {
+      background: rgba(255,255,255,.05);
+    }
+
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-paid {
+      background: rgba(133, 255, 167, 0.2);
+      color: var(--accent);
+    }
+    .status-pending {
+      background: rgba(255, 211, 106, 0.2);
+      color: var(--warning);
+    }
+    .status-overdue {
+      background: rgba(255, 122, 122, 0.2);
+      color: var(--danger);
+    }
+
+    .action-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: all 0.2s ease;
+    }
+    .action-btn:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    .summary-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(255,255,255,.1);
+    }
+
+    .summary-total {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--brand-2);
+      border-top: 2px solid rgba(255,255,255,.2);
+      border-bottom: none;
+      padding-top: 16px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #001028;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      margin-top: 10px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .billing-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="logoo.jpg" alt="CureDash Logo" width="50" height="50">
+      <span>CureDash</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="patient-records.html">Patient Records</a></li>
+        <li><a href="billing.html" class="active">Billing</a></li>
+        <li><a href="lab-results.html">Lab Results</a></li>
+        <li><a href="pharmacy.html">Pharmacy</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Billing & Invoices</h1>
+    
+    <div class="billing-container">
+      <section class="table-card">
+        <table id="billingTable">
+          <thead>
+            <tr>
+              <th>Invoice #</th>
+              <th>Patient</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="billingTableBody">
+            <!-- Billing data will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </section>
+      
+      <section class="summary-card">
+        <h3>Billing Summary</h3>
+        <div class="summary-item">
+          <span>Total Invoices:</span>
+          <span id="totalInvoices">0</span>
+        </div>
+        <div class="summary-item">
+          <span>Paid Amount:</span>
+          <span id="paidAmount">₹0</span>
+        </div>
+        <div class="summary-item">
+          <span>Pending Amount:</span>
+          <span id="pendingAmount">₹0</span>
+        </div>
+        <div class="summary-item">
+          <span>Overdue Amount:</span>
+          <span id="overdueAmount">₹0</span>
+        </div>
+        <div class="summary-item summary-total">
+          <span>Total Revenue:</span>
+          <span id="totalRevenue">₹0</span>
+        </div>
+        <button class="btn-primary" id="generateReportBtn">Generate Report</button>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year">2025</span> CureDash Health Pvt. Ltd. — All Rights Reserved.
+  </footer>
+
+  <script>
+    // Billing Data
+    const billingData = {
+      invoices: [
+        {
+          id: "INV001",
+          patient: "Rahul Sharma",
+          date: "2025-03-15",
+          amount: 2500,
+          status: "Paid"
+        },
+        {
+          id: "INV002",
+          patient: "Priya Patel",
+          date: "2025-03-10",
+          amount: 1800,
+          status: "Paid"
+        },
+        {
+          id: "INV003",
+          patient: "Amit Kumar",
+          date: "2025-02-28",
+          amount: 4200,
+          status: "Pending"
+        },
+        {
+          id: "INV004",
+          patient: "Sneha Reddy",
+          date: "2025-03-18",
+          amount: 3200,
+          status: "Paid"
+        },
+        {
+          id: "INV005",
+          patient: "Vikram Singh",
+          date: "2025-03-05",
+          amount: 1500,
+          status: "Overdue"
+        },
+        {
+          id: "INV006",
+          patient: "Anjali Mehta",
+          date: "2025-02-20",
+          amount: 2800,
+          status: "Pending"
+        }
+      ]
+    };
+
+    // Function to render billing table
+    function renderBillingTable() {
+      const tbody = document.getElementById("billingTableBody");
+      tbody.innerHTML = "";
+      
+      billingData.invoices.forEach(invoice => {
+        const row = document.createElement("tr");
+        let statusClass = "";
+        if (invoice.status === "Paid") statusClass = "status-paid";
+        else if (invoice.status === "Pending") statusClass = "status-pending";
+        else if (invoice.status === "Overdue") statusClass = "status-overdue";
+        
+        row.innerHTML = `
+          <td>${invoice.id}</td>
+          <td>${invoice.patient}</td>
+          <td>${invoice.date}</td>
+          <td>₹${invoice.amount}</td>
+          <td><span class="status-badge ${statusClass}">${invoice.status}</span></td>
+          <td>
+            <button class="action-btn" onclick="viewInvoice('${invoice.id}')">View</button>
+            <button class="action-btn" onclick="downloadInvoice('${invoice.id}')">Download</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      
+      updateBillingSummary();
+    }
+
+    // Function to update billing summary
+    function updateBillingSummary() {
+      const totalInvoices = billingData.invoices.length;
+      const paidAmount = billingData.invoices
+        .filter(inv => inv.status === "Paid")
+        .reduce((sum, inv) => sum + inv.amount, 0);
+      const pendingAmount = billingData.invoices
+        .filter(inv => inv.status === "Pending")
+        .reduce((sum, inv) => sum + inv.amount, 0);
+      const overdueAmount = billingData.invoices
+        .filter(inv => inv.status === "Overdue")
+        .reduce((sum, inv) => sum + inv.amount, 0);
+      const totalRevenue = paidAmount + pendingAmount + overdueAmount;
+      
+      document.getElementById("totalInvoices").textContent = totalInvoices;
+      document.getElementById("paidAmount").textContent = `₹${paidAmount}`;
+      document.getElementById("pendingAmount").textContent = `₹${pendingAmount}`;
+      document.getElementById("overdueAmount").textContent = `₹${overdueAmount}`;
+      document.getElementById("totalRevenue").textContent = `₹${totalRevenue}`;
+    }
+
+    // Placeholder functions for actions
+    function viewInvoice(id) {
+      alert(`Viewing invoice: ${id}`);
+      // In a real application, this would show invoice details
+    }
+
+    function downloadInvoice(id) {
+      alert(`Downloading invoice: ${id}`);
+      // In a real application, this would generate and download PDF
+    }
+
+    // Initialize
+    document.addEventListener("DOMContentLoaded", function() {
+      renderBillingTable();
+      document.getElementById("generateReportBtn").addEventListener("click", function() {
+        alert("Generating billing report...");
+        // In a real application, this would generate a comprehensive report
+      });
+      document.getElementById("year").textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
